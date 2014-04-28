@@ -13,6 +13,14 @@
 
 ActiveRecord::Schema.define(version: 20140428215529) do
 
+  create_table "circle_user_memberships", id: false, force: true do |t|
+    t.integer "circle_id"
+    t.integer "user_id"
+  end
+
+  add_index "circle_user_memberships", ["circle_id"], name: "index_circle_user_memberships_on_circle_id"
+  add_index "circle_user_memberships", ["user_id"], name: "index_circle_user_memberships_on_user_id"
+
   create_table "circles", force: true do |t|
     t.integer  "user_id"
     t.string   "title"
@@ -21,14 +29,6 @@ ActiveRecord::Schema.define(version: 20140428215529) do
   end
 
   add_index "circles", ["user_id"], name: "index_circles_on_user_id"
-
-  create_table "circles_users", id: false, force: true do |t|
-    t.integer "circle_id"
-    t.integer "user_id"
-  end
-
-  add_index "circles_users", ["circle_id"], name: "index_circles_users_on_circle_id"
-  add_index "circles_users", ["user_id"], name: "index_circles_users_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email"

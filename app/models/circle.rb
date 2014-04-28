@@ -14,6 +14,10 @@ class Circle < ActiveRecord::Base
 
   belongs_to :user
 
-  has_and_belongs_to_many :users
+  has_many :circle_user_memberships
+
+  has_many :friends,
+  through: :circle_user_memberships,
+  source: :user
 
 end

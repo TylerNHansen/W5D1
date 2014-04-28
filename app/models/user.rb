@@ -15,7 +15,13 @@ class User < ActiveRecord::Base
   validates :token, uniqueness: true
   has_secure_password validations: false
 
-  has_and_belongs_to_many :circles
+  has_many :circles,
+  through: :circle_user_memberships,
+  source: :circle
+
+  has_many :circle_user_memberships
+
+
 
   def reset_token!
     self.token = SecureRandom.urlsafe_base64(16)
