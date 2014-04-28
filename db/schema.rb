@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20140428215529) do
 
-  create_table "circle_user_memberships", id: false, force: true do |t|
+  create_table "circle_user_memberships", force: true do |t|
     t.integer "circle_id"
     t.integer "user_id"
   end

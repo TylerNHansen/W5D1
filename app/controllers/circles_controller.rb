@@ -3,7 +3,7 @@ class CirclesController < ApplicationController
 
 
   def index
-    @circles = Circle.all
+    @circles = current_user.circles
   end
 
 
@@ -21,8 +21,9 @@ class CirclesController < ApplicationController
 
   def create
     @circle = Circle.new(circle_params)
-    user_ids.each { |uid| @circle.user_ids << uid }
-    fail
+    @circle.friends = User.where(id: user_ids)
+    @circle.user = current_user
+    @circle.save
     respond_to do |format|
       if @circle.save
         format.html { redirect_to @circle, notice: 'Circle was successfully created.' }
@@ -37,6 +38,7 @@ class CirclesController < ApplicationController
   # PATCH/PUT /circles/1
   # PATCH/PUT /circles/1.json
   def update
+    @circle.friends = User.where(id: user_ids)
     respond_to do |format|
       if @circle.update(circle_params)
         format.html { redirect_to @circle, notice: 'Circle was successfully updated.' }
@@ -70,6 +72,7 @@ class CirclesController < ApplicationController
     end
 
     def user_ids
+      return [] if params[:users].nil?
       params.require(:users).require(:user_ids)
     end
 end
