@@ -20,4 +20,6 @@ class Circle < ActiveRecord::Base
   through: :circle_user_memberships,
   source: :user
 
+  has_many :circle_post_shares
+  has_many :posts, through: :circle_post_shares
 end

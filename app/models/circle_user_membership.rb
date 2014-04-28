@@ -2,6 +2,7 @@
 #
 # Table name: circle_user_memberships
 #
+#  id        :integer          not null, primary key
 #  circle_id :integer
 #  user_id   :integer
 #
