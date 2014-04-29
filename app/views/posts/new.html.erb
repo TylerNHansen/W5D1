@@ -1,0 +1,36 @@
+<form action="<%= posts_url %>" method="post">
+
+  <input type="hidden" name="authenticity_token"
+  value="<%= form_authenticity_token %>">
+
+  <label>Body
+    <input type="text" name="post[body]">
+  </label>
+  <div>
+  <label>Links
+    <% 3.times do |i| %>
+    <input type="text" name="links[<%=i%>][url]">
+    <% end %>
+  </label>
+  </div>
+
+  <div>
+  <label>Circles
+    <% Circle.all.each_with_index do |circle, i| %>
+
+     <label> <%= circle.title %>
+      <input
+      type="checkbox"
+      name="circle[<%= i %>][id]"
+      value="<%= circle.id %>">
+    </label>
+
+    <% end %>
+  </label>
+  </div>
+
+  <div>
+  <input type="submit" value="Submit Post">
+  </div>
+
+</form>

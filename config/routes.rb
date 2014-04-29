@@ -6,6 +6,9 @@ Friendcircle::Application.routes.draw do
   resources :users, only: [:create, :new, :edit, :index]
   resource :session, only: [:create, :new, :destroy]
 
+  resources :posts, only: [:create, :new, :destroy, :index]
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

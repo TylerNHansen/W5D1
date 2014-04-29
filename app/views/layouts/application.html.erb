@@ -8,6 +8,8 @@
 </head>
 <body>
 
+<%= flash[:errors] %>
+
 <% if signed_in? %>
 Welcome, <%= current_user.email%>
 <%= button_to 'Sign Out', session_url, method: :delete %>
